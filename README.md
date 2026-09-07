@@ -1,68 +1,156 @@
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="banner-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="banner-light.svg">
-  <img alt="Raahul Muthukrishnan. Small models and evaluation." src="banner-light.svg">
-</picture>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:1E3A5F,55:2C6E9B,100:5BA3C7&height=160&section=header" width="100%" alt="" />
 
-Applied scientist intern at Amazon, partway through an MS in AI and ML. Most of what I do is small models and evaluation. The repos here are things I wrote from scratch to understand how they work, and a couple of them turned into something.
+<div align="center">
 
-Twice now the problem has turned out to be in the benchmark rather than the model. At Amazon I spent about three weeks reproducing published image detectors that would not match their reported accuracy, and the cause was in how the benchmark's two classes had been prepared. In `tinyturn` below, a turn detector that scores 0.98 on its own test set scores 0.60 on real Indian speech. I did not go looking for either of those.
+<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=700&size=34&duration=1&pause=99999&color=2C6E9B&center=true&vCenter=true&repeat=false&width=760&height=56&lines=Built+from+the+primitives." alt="Built from the primitives." />
 
-First author on *CA-FAS: Centerness-Aware Anchor-Free Multimodal Video Summarization*, accepted at ISED-2026.
+# Raahul Muthukrishnan
+
+</div>
 
 ---
 
-## tinyturn
+<div align="center">
 
-Turn detection for voice agents. When a speaker goes quiet, decide whether they have finished or are still thinking. Fire too early and the agent talks over people; fire too late and the whole conversation feels sluggish.
-
-I reproduced the published reference model's 93.7% on its own test set exactly. On spontaneous Indian speech it gets 56.3%. The reason is in the training corpus: its 12,006 Hindi clips are all Google TTS, so what the model has learned is how synthetic Hindi stops.
-
-|                              | params  | ONNX fp32 | latency, 1 CPU thread | AUROC, official test | AUROC, real Indian speech |
-| ---------------------------- | ------- | --------- | --------------------- | -------------------- | ------------------------- |
-| `smart-turn-v3.2`, reference | 8.00 M  | 32 MB     | 20.2 ms               | 0.983                | 0.602                     |
-| `convtf`, mine, + real data  | 1.14 M  | 5.4 MB    | 4.62 ms               | 0.933                | 0.928                     |
-| `smallcnn`, mine             | 0.19 M  | 1.5 MB    | 3.11 ms               |                      |                           |
-
-Adding 27.7 hours of real Hindi and Hinglish took a 1.14 M model from 0.544 to 0.906 AUROC on real Hinglish, and cost 0.004 on the multilingual benchmark. 78% of that gain held up on an independent Hindi corpus the model had never seen. The data mattered more than the parameter count here, which is not what I expected going in.
-
-The part that did not work: in a simulated conversation loop my 1.14 M model was worse than doing nothing until the interruption budget got to around 12%, and both models finish well inside the 500 to 800 ms that a turn allows, so being 4.6 times faster buys nothing. That is in the repo README as well.
-
-Trained on 270,946 clips across 23 languages, 82% of it synthetic. Real speech from ungated Vaani mirrors with four districts held out. ONNX export with int8 and a parity check, bootstrap confidence intervals on the metrics, 26 tests, and a Gradio demo.
-
----
-
-## Also here
-
-**[rag-from-scratch](https://github.com/raahul4004/rag-from-scratch)** · Retrieval and generation over a 1,208 page textbook with no LangChain, no LlamaIndex and no vector database. 1,680 chunks, a 768 dimensional index that is a flat 22 MB tensor on disk, and `torch.topk` instead of FAISS, which at this scale is a dependency rather than a speedup. Warm search runs around 30 ms. I left out the reranker and query rewriting too, mostly to see how far plain dense retrieval gets on its own.
-
-**[llama2-from-scratch](https://github.com/raahul4004/llama2-from-scratch)** · Llama 2 inference written from the papers in PyTorch. Architecture and decode loop, with no reference implementation to check against.
-
-**[gpt_from_scratch](https://github.com/raahul4004/gpt_from_scratch)** · A character level GPT with the attention head, the multi-head wrapper, the feed-forward block and the residual stack written out longhand.
-
-<details>
-<summary>Earlier repositories, kept for the record</summary>
+**Applied Scientist Intern at Amazon · MS in AI &amp; ML · First author, ISED-2026**
 
 <br>
 
-**Deep-Learning-From-Scratch** · Deep learning algorithms implemented in numpy, with the intermediate steps visualised.
+<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=20&duration=1&pause=99999&color=2EA043&center=true&vCenter=true&repeat=false&width=760&height=36&lines=Open+to+AI+%2F+ML+Internships+from+Nov+'26" alt="Open to AI / ML internships from Nov '26" />
 
-**Machine-Learning-from-Scratch-using-Python** · Linear and logistic regression, naive Bayes, the perceptron and k-nearest neighbours, written with numpy rather than called from scikit-learn.
+<br>
 
-**A-deep-understanding-of-Deep-Learning-using-Python** · Worked notebooks from a deep learning course.
+Applied scientist intern at Amazon, working mostly on model evaluation and inference cost.<br>
+Most of what I build I write from the primitives: transformer decoders, retrieval pipelines, classical ML in NumPy.<br>
+The habit running through my work is checking whether a number means what it appears to mean.<br>
+First author on a paper accepted at ISED-2026.
 
-**Data-Extraction-and-NLP** · Text extraction and analysis in Python.
+📖 Currently learning: **agent orchestration and tool calling**
 
-**Stable-Diffusion** · TODO_ONE_LINE
+<br>
 
-**Real-Life-Violence-Detection** · TODO_ONE_LINE
+<a href="https://raahul4004.github.io"><img src="https://img.shields.io/badge/Portfolio-1E3A5F?style=flat-square&logo=googlechrome&logoColor=white" alt="Portfolio" /></a>
+<a href="https://linkedin.com/in/raahul404"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
+<a href="mailto:raahul4004@gmail.com"><img src="https://img.shields.io/badge/Email-C5533C?style=flat-square&logo=gmail&logoColor=white" alt="Email" /></a>
 
-**AutomaticEmailReplySystem** · TODO_ONE_LINE
+</div>
 
-</details>
+<br>
 
----
+```console
+raahul@dev - zsh
 
-Learning agent orchestration and tool calling at the moment. `tinyturn` is a piece of a voice agent but it does not touch that part.
+$ whoami
+raahul muthukrishnan · applied scientist intern @ amazon · mumbai / bengaluru
 
-[raahul4004.github.io](https://raahul4004.github.io) · [LinkedIn](https://linkedin.com/in/raahul404) · raahul4004@gmail.com
+$ ls ./projects
+tinyturn             rag-from-scratch      llama2-from-scratch   gpt-from-scratch
+stable-diffusion     violence-detection    ml-from-scratch       dl-from-scratch
+
+$ cat interests.txt
+language models · retrieval · model evaluation · small efficient models
+
+$ cat open_to.txt
+ai/ml internships from nov '26 · full-time from jun '27 · bengaluru / remote
+
+$ █
+```
+
+<br>
+
+<table>
+<tr>
+<td width="50%" valign="top">
+
+### 🧠 [Llama 2 Inference from Scratch](https://github.com/raahul4004/llama2-from-scratch)
+
+The modern Llama stack written from the paper with no reference implementation to check against: RMSNorm, rotary positional embeddings, grouped-query attention, SwiGLU, and a KV cache with `start_pos` threaded through so decoding stays linear per step.
+
+`PyTorch` `Python`
+
+</td>
+<td width="50%" valign="top">
+
+### ✍️ [GPT from Scratch](https://github.com/raahul4004/gpt_from_scratch)
+
+A character-level GPT pre-trained from random init with every component written out longhand rather than imported: the attention head, the multi-head wrapper, the feed-forward and residual blocks, and the sampling loop.
+
+`PyTorch` `Python`
+
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+
+### 🔍 [RAG from Scratch](https://github.com/raahul4004/rag-from-scratch)
+
+Retrieval and question answering over a 1,200 page textbook with no LangChain and no vector database. Chunking, embeddings, a flat tensor index searched with `torch.topk`, and Phi-3-mini driven from code with the prompt assembled by hand, served behind FastAPI.
+
+`PyTorch` `FastAPI` `sentence-transformers`
+
+</td>
+<td width="50%" valign="top">
+
+### 🎧 [tinyturn](https://github.com/raahul4004/tinyturn)
+
+Turn detection for voice agents: decide whether a speaker has finished or is only pausing. Three architectures trained from scratch, ONNX export with int8 and a numerical parity check, and a CPU benchmark harness with bootstrap confidence intervals.
+
+`PyTorch` `ONNX` `Gradio`
+
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+
+### 🎨 [Stable Diffusion](https://github.com/raahul4004/Stable-Diffusion)
+
+TODO_ONE_OR_TWO_SENTENCES
+
+`PyTorch` `Python`
+
+</td>
+<td width="50%" valign="top">
+
+### 🎥 [Real-Life Violence Detection](https://github.com/raahul4004/Real-Life-Violence-Detection)
+
+TODO_ONE_OR_TWO_SENTENCES
+
+`PyTorch` `OpenCV` `Python`
+
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+
+### 📐 [ML Algorithms from Scratch](https://github.com/raahul4004/Machine-Learning-from-Scratch-using-Python)
+
+Linear and logistic regression, naive Bayes, the perceptron and k-nearest neighbours implemented in NumPy rather than called from scikit-learn, deriving the gradients and decision rules to see where each one fails.
+
+`NumPy` `Pandas` `Python`
+
+</td>
+<td width="50%" valign="top">
+
+### 🧪 [Deep Learning from Scratch](https://github.com/raahul4004/Deep-Learning-From-Scratch)
+
+Deep learning algorithms built up in NumPy with the intermediate steps visualised, so the forward and backward passes are something you can watch rather than take on trust.
+
+`NumPy` `Matplotlib` `Python`
+
+</td>
+</tr>
+</table>
+
+<br>
+
+<div align="center">
+
+### Also
+
+**CA-FAS: Centerness-Aware Anchor-Free Multimodal Video Summarization** · first author, accepted at ISED-2026, NIT Warangal<br>
+**Amazon ML Challenge** · All India Rank 38 of 10,000+ teams &nbsp;·&nbsp; **Kaggle NeuroGolf** (IJCAI-ECAI 2026) · top 24%<br>
+**MS, AI &amp; ML** · VIT, 9.63/10 &nbsp;·&nbsp; **BSc, Data Science &amp; Analytics** · rank 1, 10.0/10
+
+</div>
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:5BA3C7,45:2C6E9B,100:1E3A5F&height=120&section=footer" width="100%" alt="" />
